@@ -1,8 +1,9 @@
-import { UserData, UserModalProps } from "@/interfaces";
+import { UserProps, UserModalProps } from "@/interfaces";
 import React, { useState } from "react";
 
 const UserModal: React.FC<UserModalProps> = ({ onClose, onSubmit }) => {
-    const [user, setUser] = useState<UserData>({
+    const [user, setUser] = useState<UserProps>({
+        id: 0, // Temporary ID, will be replaced
         name: "",
         username: "",
         email: "",
@@ -35,7 +36,7 @@ const UserModal: React.FC<UserModalProps> = ({ onClose, onSubmit }) => {
                 setUser(prevUser => ({
                     ...prevUser,
                     [parent]: {
-                        ...prevUser[parent as keyof UserData] as any,
+                        ...prevUser[parent as keyof UserProps] as any,
                         [child]: value
                     }
                 }));
