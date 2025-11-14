@@ -18,6 +18,12 @@ export interface Address {
     geo: Geo;
 }
 
+export interface Company {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+}
+
 export interface UserProps {
     id: number;
     name: string;
@@ -26,6 +32,5 @@ export interface UserProps {
     address: Address;
     phone: string;
     website: string;
-    company: string;
+    company: Company;
 }
-
