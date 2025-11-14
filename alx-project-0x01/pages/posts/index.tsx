@@ -37,12 +37,48 @@ const Posts: React.FC<PostsPageProps> = ({ posts }) => {
 };
 
 export async function getStaticProps() {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-    const posts = await response.json();
+    const englishPosts = [
+        {
+            userId: 1,
+            id: 1,
+            title: "Understanding React Components",
+            body: "React components are the building blocks of React applications. They allow you to create reusable UI elements that manage their own state and properties."
+        },
+        {
+            userId: 1,
+            id: 2,
+            title: "Next.js Framework Overview",
+            body: "Next.js provides a complete solution for production-ready React applications. It includes features like server-side rendering, static generation, and API routes out of the box."
+        },
+        {
+            userId: 1,
+            id: 3,
+            title: "TypeScript Benefits",
+            body: "TypeScript adds optional static typing to JavaScript, helping developers catch errors during development and providing better tooling support in modern code editors."
+        },
+        {
+            userId: 1,
+            id: 4,
+            title: "Tailwind CSS Utility Classes",
+            body: "Tailwind CSS is a utility-first CSS framework that enables rapid UI development. Instead of writing custom CSS, you use predefined classes to style your elements."
+        },
+        {
+            userId: 1,
+            id: 5,
+            title: "Modern Web Development",
+            body: "Contemporary web development emphasizes performance, accessibility, and user experience. Technologies like React, Vue, and Angular help build interactive user interfaces."
+        },
+        {
+            userId: 1,
+            id: 6,
+            title: "API Integration Techniques",
+            body: "Integrating with RESTful APIs involves making HTTP requests, handling responses, and managing state. Libraries like Axios and Fetch API simplify these operations."
+        }
+    ];
     
     return {
         props: {
-            posts: posts.slice(0, 6) // Limit to 6 posts for better display
+            posts: englishPosts
         }
     };
 }
