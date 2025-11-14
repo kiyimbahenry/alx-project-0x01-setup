@@ -1,12 +1,25 @@
 import Header from "@/components/layout/Header";
 import UserCard from "@/components/common/UserCard";
-import { UserProps } from "@/interfaces";
+import UserModal from "@/components/common/UserModal";
+import { UserData, UserProps } from "@/interfaces";
+import { useState } from "react";
 
 interface UsersPageProps {
     users: UserProps[];
 }
 
 const Users: React.FC<UsersPageProps> = ({ users }) => {
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [allUsers, setAllUsers] = useState<UserProps[]>(users);
+
+    const handleAddUser = (newUser: UserData) => {
+        const userWithId: UserProps = {
+            ...newUser,
+            id: allUsers.length + 1
+        };
+        setAllUsers(prevUsers => [userWithId, ...prevUsers]);
+    };
+
     return (
         <div className="flex flex-col min-h-screen">
             <Header />
@@ -14,12 +27,15 @@ const Users: React.FC<UsersPageProps> = ({ users }) => {
                 <div className="container mx-auto">
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="text-2xl font-semibold">Our Users</h1>
-                        <button className="bg-blue-700 px-4 py-2 rounded-full text-white hover:bg-blue-800 transition">
+                        <button 
+                            onClick={() => setModalOpen(true)}
+                            className="bg-blue-700 px-4 py-2 rounded-full text-white hover:bg-blue-800 transition"
+                        >
                             Add User
                         </button>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {users?.map((user: UserProps) => (
+                        {allUsers?.map((user: UserProps) => (
                             <UserCard 
                                 key={user.id}
                                 id={user.id}
@@ -35,6 +51,13 @@ const Users: React.FC<UsersPageProps> = ({ users }) => {
                     </div>
                 </div>
             </main>
+
+            {isModalOpen && (
+                <UserModal 
+                    onClose={() => setModalOpen(false)} 
+                    onSubmit={handleAddUser} 
+                />
+            )}
         </div>
     );
 };
